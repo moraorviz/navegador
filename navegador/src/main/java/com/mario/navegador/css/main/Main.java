@@ -1,4 +1,4 @@
-package com.mario.navegador.main;
+package com.mario.navegador.css.main;
 
 import java.io.File;
 import java.io.FileReader;
@@ -7,6 +7,8 @@ import java.net.URL;
 
 import com.mario.navegador.css.ast.AstCss;
 import com.mario.navegador.css.parser.*;
+import com.mario.navegador.css.visitor.BuscaParamEnCssVisitor;
+import com.mario.navegador.css.visitor.PrintCssAstVisitor;
 
 public class Main 
 {
@@ -23,6 +25,17 @@ public class Main
         AstCss astCss = parser.parse();
         System.out.println(astCss);
 
+        if (astCss != null) {
+            System.out.println("\n========== buscando parametros ============\n");
+            BuscaParamEnCssVisitor buscaParam = new BuscaParamEnCssVisitor();
+            String h1Color = buscaParam.search("h1", "color", astCss);
+            System.out.println(h1Color);
+        }
+
+        System.out.println("\n========== imprimiendo arbol ============\n");
+        PrintCssAstVisitor printCss = new PrintCssAstVisitor();
+        String arbol = (String) astCss.accept(printCss, null);
+        System.out.println(arbol);
     }
 
     static void listaTokens(Lexicon lex) {

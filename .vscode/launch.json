@@ -4,6 +4,13 @@
             "type": "java",
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
+            "mainClass": "com.mario.navegador.css.main.Main",
+            "projectName": "navegador"
+        },
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
             "mainClass": "com.mario.navegador.main.Main",
             "projectName": "navegador"
         },
