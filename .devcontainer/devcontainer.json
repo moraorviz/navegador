@@ -1,0 +1,13 @@
+{
+    "name": "Navegador",
+    "dockerFile": "Dockerfile",
+    "runArgs": ["-u", "vscode"],
+    "settings": {
+        "java.home": "/docker-java-home",
+        "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+        "vscjava.vscode-java-pack",
+        "redhat.vscode-xml"
+    ]
+}
