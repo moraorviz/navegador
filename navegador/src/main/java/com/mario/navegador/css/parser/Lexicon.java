@@ -18,6 +18,7 @@ public class Lexicon {
     public Lexicon (FileReader f) {
         filereader = f;
         String lex;
+
         try {
                 char valor = (char) 0;
                 while(valor != (char) -1) {
@@ -53,6 +54,8 @@ public class Lexicon {
                                 lex = getSize(valor + "");
                                 tokens.add(new Token(TokensId.SIZE, lex, line));
                             } else {
+                                // se llama al metodo getText. Se suma un String vacio al char
+                                // para pasar el argumento de char a String
                                 lex = getText(valor + "");
                                 switch (lex) {
                                     case "h1":

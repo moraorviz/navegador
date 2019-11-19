@@ -20,6 +20,8 @@ public class Main
         File file = app.getFileFromResources("EX1.css");
         FileReader fileReader = new FileReader(file);
         Lexicon lex = new Lexicon(fileReader);
+        //Comentado el test del analisis lexico para evitar
+        //consumir todos los tokens antes del sintactico
         //listaTokens(lex);
         Parser parser = new Parser(lex);
         AstCss astCss = parser.parse();

@@ -9,6 +9,11 @@
 *.userosscache
 *.sln.docstates
 
+# VSCode
+.classpath
+.project
+.settings
+
 # Java and Maven
 target/
 pom.xml.tag
