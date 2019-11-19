@@ -215,10 +215,6 @@ public class Lexicon {
                         } else if ("=".equals(valor + "")) {
                             tokens.add(new Token(TokensId.EQUAL, "=", line));
                         }
-                        //System.out.println("Entrando en opcion por defecto");
-                        //String textoInterior = getTextoInterior(valor + "");
-                        //System.out.println(textoInterior);
-
                 }
             }
             
