@@ -24,6 +24,7 @@ public class Lexicon {
 
         try {
             char valor = (char) 0;
+            char cerrarLlave;
             while (valor != (char) -1) {
                 valor = nextChar();
 
@@ -34,6 +35,7 @@ public class Lexicon {
                         //caso se abre etiqueta
                         if (valor != '/') {
                             String contEtiq = getTextoEtiqueta(valor + "");
+                            lex = "<" + contEtiq + ">";
                             //creacion de tokens
                             switch(contEtiq) {
                                 case "html":
@@ -44,8 +46,8 @@ public class Lexicon {
                                     break;
                                 case "title":
                                     tokens.add(new Token(TokensId.TITLE, "<title>", line));
+                                    cerrarLlave = nextChar();
 
-                                    char cerrarLlave = nextChar();
                                     if (cerrarLlave == '>') {
                                         char primeraLetra = nextChar();
                                         String textoInterior = getTextoInterior(primeraLetra);
@@ -63,21 +65,82 @@ public class Lexicon {
                                     break;
                                 case "h1":
                                     tokens.add(new Token(TokensId.H1, "<h1>", line));
+                                    cerrarLlave = nextChar();
+
+                                    //TODO: refactorizar el siguiente procedimiento
+                                    //coger texto interior 
+                                    if (cerrarLlave == '>') {
+                                        char primeraLetra = nextChar();
+                                        String textoInterior = getTextoInterior(primeraLetra);
+                                        tokens.add(new Token(TokensId.TEXT, textoInterior, line));
+                                    } else {
+                                        errorLexico(valor + "");
+                                    }
                                     break;
                                 case "h2":
                                     tokens.add(new Token(TokensId.H2, "<h2>", line));
+                                    cerrarLlave = nextChar();
+
+                                    if (cerrarLlave == '>') {
+                                        char primeraLetra = nextChar();
+                                        String textoInterior = getTextoInterior(primeraLetra);
+                                        tokens.add(new Token(TokensId.TEXT, textoInterior, line));
+                                    } else {
+                                        errorLexico(valor + "");
+                                    }
                                     break;
+
                                 case "p":
                                     tokens.add(new Token(TokensId.P, "<p>", line));
+                                    cerrarLlave = nextChar();
+
+                                    if (cerrarLlave == '>') {
+                                        char primeraLetra = nextChar();
+                                        String textoInterior = getTextoInterior(primeraLetra);
+                                        tokens.add(new Token(TokensId.TEXT, textoInterior, line));
+                                    } else {
+                                        errorLexico(valor + "");
+                                    }
+
                                     break;
                                 case "b":
                                     tokens.add(new Token(TokensId.BOLD, "<b>", line));
+                                    cerrarLlave = nextChar();
+
+                                    if (cerrarLlave == '>') {
+                                        char primeraLetra = nextChar();
+                                        String textoInterior = getTextoInterior(primeraLetra);
+                                        tokens.add(new Token(TokensId.TEXT, textoInterior, line));
+                                    } else {
+                                        errorLexico(valor + "");
+                                    }
+
                                     break;
                                 case "i":
                                     tokens.add(new Token(TokensId.ITALIC, "<i>", line));
+                                    cerrarLlave = nextChar();
+
+                                    if (cerrarLlave == '>') {
+                                        char primeraLetra = nextChar();
+                                        String textoInterior = getTextoInterior(primeraLetra);
+                                        tokens.add(new Token(TokensId.TEXT, textoInterior, line));
+                                    } else {
+                                        errorLexico(valor + "");
+                                    }
+
                                     break;
                                 case "u":
                                     tokens.add(new Token(TokensId.UNDERL, "<u>", line));
+                                    cerrarLlave = nextChar();
+
+                                    if (cerrarLlave == '>') {
+                                        char primeraLetra = nextChar();
+                                        String textoInterior = getTextoInterior(primeraLetra);
+                                        tokens.add(new Token(TokensId.TEXT, textoInterior, line));
+                                    } else {
+                                        errorLexico(valor + "");
+                                    }
+
                                     break;
                             }
                         //caso se cierra etiqueta
@@ -137,6 +200,21 @@ public class Lexicon {
                     // opcion por defecto
                     // no es ninguno de los anteriores
                     default:
+                        //si es una letra, devuelve la palabra
+                        if (Character.isAlphabetic(valor)
+                            || ".".equals(valor + "")) {
+                            String palabra = "";
+                            while(Character.isAlphabetic(valor)
+                                || ".".equals(valor + "")) {
+                                palabra = palabra.concat(valor + "");
+                                valor = nextChar();
+                            }
+
+                            tokens.add(new Token(TokensId.TEXT, palabra, line));
+
+                        } else if ("=".equals(valor + "")) {
+                            tokens.add(new Token(TokensId.EQUAL, "=", line));
+                        }
                         //System.out.println("Entrando en opcion por defecto");
                         //String textoInterior = getTextoInterior(valor + "");
                         //System.out.println(textoInterior);
@@ -188,7 +266,8 @@ public class Lexicon {
 
         //list vacia de palabras
         List<String> listaPalabras = new ArrayList<String>();
-
+        //signos de puntuacion
+        String puntuacion = ".,:;";
         //ir formando palabras
         String palabra = primerCaracter + "";
         //se coge el siguiente caracter
@@ -196,6 +275,8 @@ public class Lexicon {
         //se itera mientras sea valido (numero o letra)
         while (Character.isDigit(caracterSiguiente)
             || Character.isAlphabetic(caracterSiguiente)
+            //comprobar si es un isgno de puntuacion
+            || puntuacion.contains(caracterSiguiente + "") 
             || caracterSiguiente == ' '
             || caracterSiguiente == '<') { 
 
@@ -206,6 +287,9 @@ public class Lexicon {
             } else {
                 palabra += caracterSiguiente + "";
             }
+
+            if (caracterSiguiente == '<')
+                break;
 
             caracterSiguiente = nextChar();
         }
