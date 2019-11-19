@@ -83,6 +83,7 @@ public class Lexicon {
 
                                     if (cerrarLlave == '>') {
                                         char primeraLetra = nextChar();
+                                        // el lexico es el texto interior
                                         String textoInterior = getTextoInterior(primeraLetra);
                                         tokens.add(new Token(TokensId.TEXT, textoInterior, line));
                                     } else {
@@ -203,17 +204,46 @@ public class Lexicon {
                         //si es una letra, devuelve la palabra
                         if (Character.isAlphabetic(valor)
                             || ".".equals(valor + "")) {
+
                             String palabra = "";
+
                             while(Character.isAlphabetic(valor)
-                                || ".".equals(valor + "")) {
+                                || Character.isDigit(valor)
+                                || ".".equals(valor + "")
+                                || "=".equals(valor + "")
+                                || "/".equals(valor + "")
+                                || "\"".equals(valor + "")) {
+
                                 palabra = palabra.concat(valor + "");
                                 valor = nextChar();
                             }
 
-                            tokens.add(new Token(TokensId.TEXT, palabra, line));
+                            //si la palabra contiene el igual salvar los tokens
+                            //del link
+                            if (palabra.contains("=")) {
+                                String token = "";
+                                String lexema = "";
 
-                        } else if ("=".equals(valor + "")) {
-                            tokens.add(new Token(TokensId.EQUAL, "=", line));
+                                int posicionIgual = palabra.indexOf("=");
+                                token = palabra.substring(0, posicionIgual);
+                                lexema = palabra.substring(posicionIgual + 2, palabra.length() - 1);
+
+                                switch(token) {
+                                    case "href":
+                                        tokens.add(new Token(TokensId.HREF, lexema, line));
+                                        break;
+                                    case "rel":
+                                        tokens.add(new Token(TokensId.REL, lexema, line));
+                                        break;
+                                    case "type":
+                                        tokens.add(new Token(TokensId.TYPE, lexema, line));
+                                        break;
+                                }
+
+                            } else {
+                                returnChar(valor);
+                                tokens.add(new Token(TokensId.TEXT, palabra, line));
+                            }
                         }
                 }
             }
@@ -271,7 +301,7 @@ public class Lexicon {
         //se itera mientras sea valido (numero o letra)
         while (Character.isDigit(caracterSiguiente)
             || Character.isAlphabetic(caracterSiguiente)
-            //comprobar si es un isgno de puntuacion
+            //comprobar si es un signo de puntuacion
             || puntuacion.contains(caracterSiguiente + "") 
             || caracterSiguiente == ' '
             || caracterSiguiente == '<') { 
