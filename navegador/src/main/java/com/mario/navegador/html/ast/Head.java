@@ -6,11 +6,19 @@ public class Head implements AstHtml {
 
     public Title title;
     public Link link;
+
+    public Head(Title title, Link link) {
+        this.title = title;
+        this.link = link;
+    }
     
     @Override
     public Object accept(Visitor v, Object p) {
-        // TODO Auto-generated method stub
-        return null;
+        return v.visit(this, p);
     }
-    
+
+    public String toString() {
+        return "head: " + this.title.toString() +
+            this.link.toString();
+    }
 }

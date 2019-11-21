@@ -6,10 +6,16 @@ public class Title implements AstHtml {
 
     public String text;
 
-    @Override
-    public Object accept(Visitor v, Object p) {
-        // TODO Auto-generated method stub
-        return null;
+    public Title(String text) {
+        this.text = text;
     }
 
+    @Override
+    public Object accept(Visitor v, Object p) {
+        return v.visit(this, p);
+    }
+
+    public String toString() {
+        return "title: this.text";
+    }
 }

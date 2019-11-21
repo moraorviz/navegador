@@ -16,8 +16,13 @@ public class Link implements AstHtml {
 
     @Override
     public Object accept(Visitor v, Object p) {
-        // TODO Auto-generated method stub
-        return null;
+        return v.visit(this, p);
+    }
+
+    public String toString() {
+        return "href: " + this.href +
+            "rel: " + this.rel +
+            "type: " + this.type;
     }
     
 }

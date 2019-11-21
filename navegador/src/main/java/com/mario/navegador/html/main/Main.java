@@ -5,7 +5,10 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 
+import com.mario.navegador.html.ast.AstHtml;
+import com.mario.navegador.html.ast.Programa;
 import com.mario.navegador.html.parser.Lexicon;
+import com.mario.navegador.html.parser.Parser;
 import com.mario.navegador.html.parser.Token;
 import com.mario.navegador.html.parser.TokensId;
 
@@ -15,7 +18,7 @@ public class Main {
         System.out.println("Ejecutando Main del html\n");
         // Leer del ficher fuente
         Main app = new Main();
-        File file = app.getFileFromResources("EX4.html");
+        File file = app.getFileFromResources("EX4simple.html");
         FileReader fileReader = new FileReader(file);
 
         // Analisis lexico
@@ -23,7 +26,10 @@ public class Main {
         // Imprimir los tokens
         // Comprobar la salida con el fichero de ejemplo EX4.html para ver
         // que se devuelven todos correctamente
-        listaTokens(lex);
+        //listaTokens(lex);
+        Parser parser = new Parser(lex);
+        AstHtml astHtml = parser.parse();
+        System.out.println(astHtml.toString());
     }
 
     // Metodo auxiliar para imprimir los tokens

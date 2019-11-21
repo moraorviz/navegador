@@ -8,10 +8,17 @@ public class Body implements AstHtml {
 
     List<Parrafo> parrafos;
 
+    public Body(List<Parrafo> parrafos) {
+        this.parrafos = parrafos;
+    }
+
     @Override
     public Object accept(Visitor v, Object p) {
-        // TODO Auto-generated method stub
-        return null;
+        return v.visit(this, p);
+    }
+
+    public String toString() {
+        return "parrafos: " + parrafos.toString();
     }
 
 }

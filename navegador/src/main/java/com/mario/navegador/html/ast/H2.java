@@ -2,18 +2,20 @@ package com.mario.navegador.html.ast;
 
 import com.mario.navegador.html.visitor.Visitor;
 
-public class H2 implements AstHtml {
+public class H2 implements AstHtml, Parrafo {
 
-    String h2;
+    String text;
     
-    public H2(String h2) {
-        this.h2 = h2;
+    public H2(String text) {
+        this.text = text;
     }
 
     @Override
     public Object accept(Visitor v, Object p) {
-        // TODO Auto-generated method stub
-        return null;
+        return v.visit(this, p);
     }
-    
+
+    public String toString() {
+        return "h2: " + this.text;
+    }
 }
