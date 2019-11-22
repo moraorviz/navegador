@@ -51,6 +51,7 @@ public class Parser {
     }
 
     Head parseHead() {
+
         Head head = null;
         Title title = null;
         Link link = null;
@@ -58,13 +59,16 @@ public class Parser {
         Token token = lex.getToken();
 
         if (token.getToken() == TokensId.HEAD) {
+
             token = lex.getToken();
             while(token.getToken() != TokensId.HEADC) {
+
                 if (token.getToken() == TokensId.TITLE) {
                     title = parseTitle();
                 } else if (token.getToken() == TokensId.LINK) {
                     link = parseLink();
                 }
+
                 token = lex.getToken();
             }
         }
