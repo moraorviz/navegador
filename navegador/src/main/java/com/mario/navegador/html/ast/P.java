@@ -6,8 +6,8 @@ import com.mario.navegador.html.visitor.Visitor;
 
 public class P implements AstHtml, Parrafo {
 
-    String text;
-    List<Bloque> bloques;
+    public String text;
+    public List<Bloque> bloques;
 
     public P(String text, List<Bloque> bloques) {
         this.text = text;

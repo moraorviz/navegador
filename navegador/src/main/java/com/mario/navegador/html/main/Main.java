@@ -10,6 +10,8 @@ import com.mario.navegador.html.parser.Lexicon;
 import com.mario.navegador.html.parser.Parser;
 import com.mario.navegador.html.parser.Token;
 import com.mario.navegador.html.parser.TokensId;
+import com.mario.navegador.html.visitor.BuscaCss;
+import com.mario.navegador.html.visitor.PrintASTVisitor;
 
 public class Main {
 
@@ -32,7 +34,23 @@ public class Main {
         Parser parser = new Parser(lex);
         AstHtml astHtml = parser.parse();
 
+        //Imprimir el sintactico con toString
         System.out.println(astHtml.toString());
+
+        //Imprimir AST
+        System.out.println("===== Pintando con el visitor =====");
+        PrintASTVisitor printer = new PrintASTVisitor();
+        String representacionArbol = (String) astHtml.accept(printer, null);
+        System.out.println(representacionArbol);
+
+        //BuscaCSS
+        System.out.println("==== Probando BuscaCSS ====");
+        BuscaCss buscaCss = new BuscaCss();
+        String ruta = (String) astHtml.accept(buscaCss, null);
+        System.out.println(ruta);
+
+        //Renderiza html
+        System.out.println("==== Renderizando HTML ======");
     }
 
     // Metodo auxiliar para imprimir los tokens
@@ -41,8 +59,10 @@ public class Main {
         Token t = lex.getToken();
 
         while (t.getToken() != TokensId.EOF) {
+
             System.out.println(t.toString());
             t = lex.getToken();
+
         }
         // Devuelve token fin de fichero si ya no quedan mas
         System.out.println("\nFin de fichero. \n" + t.toString());

@@ -6,7 +6,7 @@ import com.mario.navegador.html.visitor.Visitor;
 
 public class Body implements AstHtml {
 
-    List<Parrafo> parrafos;
+    public List<Parrafo> parrafos;
 
     public Body(List<Parrafo> parrafos) {
         this.parrafos = parrafos;

@@ -4,7 +4,7 @@ import com.mario.navegador.html.visitor.Visitor;
 
 public class H2 implements AstHtml, Parrafo {
 
-    String text;
+    public String text;
     
     public H2(String text) {
         this.text = text;

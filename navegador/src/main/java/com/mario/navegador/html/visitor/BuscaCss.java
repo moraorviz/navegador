@@ -21,8 +21,11 @@ public class BuscaCss implements Visitor {
 
     @Override
     public Object visit(Head h, Object param) {
-        // TODO Auto-generated method stub
-        return null;
+
+        Link link = h.link;
+        String result = (String) link.href;
+
+        return result;
     }
 
     @Override
@@ -63,8 +66,11 @@ public class BuscaCss implements Visitor {
 
     @Override
     public Object visit(Programa p, Object param) {
-        // TODO Auto-generated method stub
-        return null;
+
+        Head head = p.head;
+        String file = (String) head.accept(this, null);
+
+        return file;
     }
 
     @Override
@@ -72,8 +78,4 @@ public class BuscaCss implements Visitor {
         // TODO Auto-generated method stub
         return null;
     }
-
-    //Visitor para buscar el archivo css
-    //recoge la cadena. Se lanza desde el main
-    
 }

@@ -22,11 +22,13 @@ public class Parser {
 
     // Parser recursivo descendente
     Program parseProgram() {
+
         Program prog = null;
         List<Regla> reglas = new ArrayList<Regla>();
         Token token = lex.getToken();
 
         while(token.getToken() == TokensId.IDENTIFICADOR) {
+
             lex.returnLastToken();
             String ident = lex.getToken().getLexeme();
             Regla regla = parseRegla(ident);
@@ -36,6 +38,7 @@ public class Parser {
                 reglas.add(regla);
             }
         }
+
         prog = new Program(reglas) ;
         return prog;
     }

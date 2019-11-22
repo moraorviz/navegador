@@ -4,9 +4,9 @@ import com.mario.navegador.html.visitor.Visitor;
 
 public class Link implements AstHtml {
 
-    String href;
-    String rel;
-    String type;
+    public String href;
+    public String rel;
+    public String type;
 
     public Link(String href, String rel, String type) {
         this.href = href;
