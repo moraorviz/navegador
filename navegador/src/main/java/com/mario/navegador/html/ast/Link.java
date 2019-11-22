@@ -22,7 +22,7 @@ public class Link implements AstHtml {
     public String toString() {
         return "href: " + this.href +
             "rel: " + this.rel +
-            "type: " + this.type;
+            "type: " + this.type + " ";
     }
     
 }

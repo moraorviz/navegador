@@ -23,4 +23,5 @@ public interface Visitor {
     public Object visit(Link l, Object param);
     public Object visit(Programa p, Object param);
     public Object visit(Bloque b, Object param);
+
 }

@@ -16,6 +16,6 @@ public class Title implements AstHtml {
     }
 
     public String toString() {
-        return "title: this.text";
+        return "title: " + this.text + " ";
     }
 }

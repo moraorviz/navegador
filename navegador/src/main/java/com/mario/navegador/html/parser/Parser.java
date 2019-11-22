@@ -74,9 +74,11 @@ public class Parser {
     }
 
     Title parseTitle() {
+
         Title title = null;
         String text = "";
         Token token = lex.getToken();
+
         while(token.getToken() != TokensId.TITLEC) {
             text = text.concat(token.getLexeme());
             token = lex.getToken();
@@ -86,6 +88,7 @@ public class Parser {
     }
 
     Link parseLink() {
+
         Link link = null;
         String href = "";
         String rel = "";
@@ -93,6 +96,7 @@ public class Parser {
         Token token = lex.getToken();
 
         while(token.getToken() != TokensId.HEADC) {
+
             if (token.getToken() == TokensId.HREF) {
                 href = token.getLexeme();
             } else if (token.getToken() == TokensId.REL) {
@@ -100,9 +104,11 @@ public class Parser {
             } else if (token.getToken() == TokensId.TYPE) {
                 type = token.getLexeme();
             }
+
             token = lex.getToken();
          }
 
+        lex.returnLastToken();
         link = new Link(href, rel, type);
         return link;
     }
@@ -113,11 +119,11 @@ public class Parser {
         H1 h1 = null;
         H2 h2 = null;
         P p = null;
-
         List<Parrafo> parrafos = new ArrayList<Parrafo>();
         Token token = lex.getToken();
 
         while(token.getToken() != TokensId.BODYC) {
+
             if (token.getToken() == TokensId.H1) {
                 h1 = getParrafoH1();
                 parrafos.add(h1);
@@ -128,6 +134,7 @@ public class Parser {
                 p = getParrafo();
                 parrafos.add(p);
             }
+
             token = lex.getToken();
         }
 
@@ -136,17 +143,14 @@ public class Parser {
     }
 
     H1 getParrafoH1() {
+
         H1 h1 = null;
         String texto = "";
-
         Token token = lex.getToken();
 
-        if (token.getToken() == TokensId.H1) {
+        while(token.getToken() != TokensId.H1C) {
+            texto = texto.concat(token.getLexeme());
             token = lex.getToken();
-            while(token.getToken() != TokensId.H1C) {
-                texto = texto.concat(token.getLexeme());
-                token = lex.getToken();
-            }
         }
 
         h1 = new H1(texto);
@@ -154,17 +158,14 @@ public class Parser {
     }
 
     H2 getParrafoH2() {
+
         H2 h2 = null;
         String texto = "";
-
         Token token = lex.getToken();
 
-        if (token.getToken() == TokensId.H2) {
+        while(token.getToken() != TokensId.H2C) {
+            texto = texto.concat(token.getLexeme());
             token = lex.getToken();
-            while(token.getToken() != TokensId.H2C) {
-                texto = texto.concat(token.getLexeme());
-                token = lex.getToken();
-            }
         }
 
         h2 = new H2(texto);
@@ -172,19 +173,18 @@ public class Parser {
     }
 
     P getParrafo() {
+
         P p = null;
         String texto = "";
-
         Token token = lex.getToken();
 
-        if (token.getToken() == TokensId.P) {
-            token = lex.getToken();
-            while(token.getToken() != TokensId.PC) {
-                if (token.getToken() == TokensId.TEXT) {
-                    texto = texto.concat(token.getLexeme());
-                }
-                token = lex.getToken();
+        while(token.getToken() != TokensId.PC) {
+
+            if (token.getToken() == TokensId.TEXT) {
+                texto = texto.concat(token.getLexeme());
             }
+
+            token = lex.getToken();
         }
 
         p = new P(texto, null);
