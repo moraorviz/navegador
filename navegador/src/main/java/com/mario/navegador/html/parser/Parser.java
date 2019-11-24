@@ -205,12 +205,8 @@ public class Parser {
                 token = lex.getToken();
                 Bloque italic = new Italic(token.getLexeme());
                 parrafo.bloques.add(italic);
-            } else if (token.getToken() == TokensId.BOLDC
-                || token.getToken() == TokensId.UNDERLC
-                || token.getToken() == TokensId.ITALICC) {
-                    token = lex.getToken();
-                }
-
+            }
+            
             token = lex.getToken();
         }
 

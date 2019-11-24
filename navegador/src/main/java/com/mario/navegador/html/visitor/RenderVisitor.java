@@ -150,9 +150,8 @@ public class RenderVisitor implements Visitor {
 
         for (Bloque b: bloques) {
             linea = new Linea(b.getTipo(), b.getTexto(), atributos);
+            pagina.lineas.add(linea);
         }
-
-        pagina.lineas.add(linea);
 
         return null;
     }
