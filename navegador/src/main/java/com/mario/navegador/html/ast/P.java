@@ -1,18 +1,13 @@
 package com.mario.navegador.html.ast;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mario.navegador.html.visitor.Visitor;
 
 public class P implements AstHtml, Parrafo {
 
-    public String text;
-    public List<Bloque> bloques;
-
-    public P(String text, List<Bloque> bloques) {
-        this.text = text;
-        this.bloques = bloques;
-    }
+    public List<Bloque> bloques = new ArrayList<Bloque>();
 
     @Override
     public Object accept(Visitor v, Object p) {
@@ -21,7 +16,6 @@ public class P implements AstHtml, Parrafo {
 
     @Override
     public String toString() {
-        return "p: " + text;
+        return "p: " + bloques.toString();
     }
-    
 }

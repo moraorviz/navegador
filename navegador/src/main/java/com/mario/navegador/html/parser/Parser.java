@@ -4,15 +4,20 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.mario.navegador.html.ast.AstHtml;
+import com.mario.navegador.html.ast.Bloque;
 import com.mario.navegador.html.ast.Body;
+import com.mario.navegador.html.ast.Bold;
 import com.mario.navegador.html.ast.H1;
 import com.mario.navegador.html.ast.H2;
 import com.mario.navegador.html.ast.Head;
+import com.mario.navegador.html.ast.Italic;
 import com.mario.navegador.html.ast.Link;
+import com.mario.navegador.html.ast.Normal;
 import com.mario.navegador.html.ast.P;
 import com.mario.navegador.html.ast.Parrafo;
 import com.mario.navegador.html.ast.Programa;
 import com.mario.navegador.html.ast.Title;
+import com.mario.navegador.html.ast.Underlined;
 
 public class Parser {
     
@@ -180,21 +185,36 @@ public class Parser {
 
     P getParrafo() {
 
-        P p = null;
-        String texto = "";
         Token token = lex.getToken();
+        P parrafo = new P();
 
         while(token.getToken() != TokensId.PC) {
 
             if (token.getToken() == TokensId.TEXT) {
-                texto = texto.concat(token.getLexeme());
-            }
+                Bloque textoNormal = new Normal(token.getLexeme());
+                parrafo.bloques.add(textoNormal);
+            } else if (token.getToken() == TokensId.BOLD) {
+                token = lex.getToken();
+                Bloque negrita = new Bold(token.getLexeme());
+                parrafo.bloques.add(negrita);
+            } else if (token.getToken() == TokensId.UNDERL) {
+                token = lex.getToken();
+                Bloque underlined = new Underlined(token.getLexeme());
+                parrafo.bloques.add(underlined);
+            } else if (token.getToken() == TokensId.ITALIC) {
+                token = lex.getToken();
+                Bloque italic = new Italic(token.getLexeme());
+                parrafo.bloques.add(italic);
+            } else if (token.getToken() == TokensId.BOLDC
+                || token.getToken() == TokensId.UNDERLC
+                || token.getToken() == TokensId.ITALICC) {
+                    token = lex.getToken();
+                }
 
             token = lex.getToken();
         }
 
-        p = new P(texto, null);
-        return p;
+        return parrafo;
     }
 
     void errorSint(String e, int line) {

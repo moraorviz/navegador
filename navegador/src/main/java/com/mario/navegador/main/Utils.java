@@ -10,7 +10,6 @@ import com.mario.navegador.html.parser.TokensId;
 public class Utils {
 
     static void listaTokensHtml(Lexicon lex) {
-
         Token t = lex.getToken();
 
         while (t.getToken() != TokensId.EOF) {

@@ -18,7 +18,7 @@ public class Main
     {
         //Lectura del fichero fuente
         Utils utils = new Utils();
-        File file = utils.getFileFromResources("EX4simple.html");
+        File file = utils.getFileFromResources("EX4.html");
         FileReader fileReader = new FileReader(file);
 
         //Lexico y sintactico
