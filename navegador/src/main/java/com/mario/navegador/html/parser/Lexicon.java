@@ -348,6 +348,10 @@ public class Lexicon {
         return contenidoEtiqueta;
     }
 
+    public void reset() {
+        this.i = 0;
+    }
+
     void errorLexico(String e) {
         System.out.println("Error lexico en: " + e);
     }
