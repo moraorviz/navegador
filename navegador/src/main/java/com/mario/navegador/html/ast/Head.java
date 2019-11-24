@@ -17,6 +17,7 @@ public class Head implements AstHtml {
         return v.visit(this, p);
     }
 
+    @Override
     public String toString() {
         return "head: " + this.title.toString() +
             this.link.toString();

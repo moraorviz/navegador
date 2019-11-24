@@ -15,6 +15,7 @@ public class H1 implements AstHtml, Parrafo {
         return v.visit(this, p);
     }
 
+    @Override
     public String toString() {
         return "h1: " + this.text;
     }

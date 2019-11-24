@@ -30,11 +30,12 @@ public class Parser {
     }
 
     Programa parseProgram() {
+
         Programa prog = null;
         Head head = null; 
         Body body = null;
-
         Token token = lex.getToken();    
+
         if (token.getToken() == TokensId.HTML) {
             head = parseHead();
             body = parseBody();
@@ -87,6 +88,7 @@ public class Parser {
             text = text.concat(token.getLexeme());
             token = lex.getToken();
         }
+
         title = new Title(text);
         return title;
     }

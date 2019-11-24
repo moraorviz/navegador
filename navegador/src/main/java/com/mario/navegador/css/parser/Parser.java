@@ -20,7 +20,6 @@ public class Parser {
         return ast;
     }
 
-    // Parser recursivo descendente
     Program parseProgram() {
 
         Program prog = null;
@@ -44,6 +43,7 @@ public class Parser {
     }
 
     Regla parseRegla(String ident) {
+
         Regla regla = null;
         List<Definicion> definiciones = new ArrayList<Definicion>();
         Token token = lex.getToken();
@@ -68,9 +68,11 @@ public class Parser {
     }
 
     Definicion parseDefinicion() {
+
         Token token = lex.getToken();
 
         switch(token.getToken()) {
+
             case COLOR:
                 if (lex.getToken().getToken() == TokensId.DOSPUNTOS)
                     return new Definicion("color", parseColors());
@@ -104,9 +106,11 @@ public class Parser {
     }
 
     String parseStyles() {
+
         Token token = lex.getToken();
 
         switch(token.getToken()) {
+
             case NORMAL:
                 return("normal");
             case ITALIC:
@@ -124,9 +128,11 @@ public class Parser {
     }
 
     String parseColors() {
+
         Token token = lex.getToken();
 
         switch(token.getToken()) {
+
             case BLACK:
                 return("black");
             case BLUE:
@@ -144,9 +150,11 @@ public class Parser {
     }
 
     String parseAlineado() {
+
         Token token = lex.getToken();
 
         switch(token.getToken()) {
+
             case CENTER:
                 return("center");
             case LEFT:
@@ -162,12 +170,13 @@ public class Parser {
     }
 
     String parseSize() {
+
         Token token = lex.getToken();
         String size = token.getLexeme();
+
         return size;
     }
 
-    //Gestion de errores del Sintactico
     void errorSintactico(String e, int line) {
         errorSint = true;
         System.out.println("Error Sintactico: " + e + " en la linea " + line);

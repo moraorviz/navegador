@@ -16,6 +16,7 @@ public class Lexicon {
     HashSet<Character> charText = new HashSet<Character>();
 
     public Lexicon (FileReader f) {
+
         filereader = f;
         String lex;
 
@@ -48,14 +49,11 @@ public class Lexicon {
                             break;
                         case (char) -1:
                             break;
-                        // Identificadores, palabras reservadas y el tamano
                         default:
                             if (Character.isDigit(valor)) {
                                 lex = getSize(valor + "");
                                 tokens.add(new Token(TokensId.SIZE, lex, line));
                             } else {
-                                // se llama al metodo getText. Se suma un String vacio al char
-                                // para pasar el argumento de char a String
                                 lex = getText(valor + "");
                                 switch (lex) {
                                     case "h1":
@@ -121,16 +119,10 @@ public class Lexicon {
         }
     }
 
-    /**
-     * Operaciones para el Sintactico
-     */
-
-    //Devolver el ultimo token
     public void returnLastToken() {
         i--;
     }
 
-    //Get Token
     public Token getToken() {
         if (i < tokens.size()) {
             return tokens.get(i++);
@@ -148,33 +140,40 @@ public class Lexicon {
         }
     }
 
-    // Privadas
     String getSize(String lexStart) throws IOException {
+
         String lexReturned = lexStart;
         char valor;
+
         do {
             valor = nextChar();
             lexReturned = lexReturned + (valor);
         } while ((valor != 'p') && (valor != -1));
 
         if (valor =='p') {
+
             valor = nextChar();
+
             if (valor =='x') {
                 lexReturned = lexReturned + (valor);
             } else {
                 errorLexico("Encontrado " + lexReturned + ". Se esperaba un token SIZE.");
             }
         }
+
         return lexReturned;
     }
 
     String getText(String lexStart) throws IOException {
+
         String lexReturned = lexStart;
         char valor = nextChar();
+
         while (Character.isDigit(valor) || Character.isAlphabetic(valor) || (valor == '-')) {
             lexReturned = lexReturned + (valor);
             valor = nextChar();
         }
+
         returnChar(valor);
         return lexReturned;
     }

@@ -17,6 +17,7 @@ public class Definicion implements AstCss {
         return v.visit(this, p);
     }
 
+    @Override
     public String toString() {
         return "varconf: " + varconf + "; value: " + value + "\n";
     }

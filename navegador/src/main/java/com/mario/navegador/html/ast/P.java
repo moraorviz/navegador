@@ -19,6 +19,7 @@ public class P implements AstHtml, Parrafo {
         return v.visit(this, p);
     }
 
+    @Override
     public String toString() {
         return "p: " + text;
     }

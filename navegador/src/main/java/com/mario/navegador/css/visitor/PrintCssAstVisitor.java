@@ -32,6 +32,4 @@ public class PrintCssAstVisitor implements Visitor {
     public Object visit(Definicion d, Object param) {
         return (String) param + d.varconf + " --> " + d.value + "\n";
     }
-
-
 }

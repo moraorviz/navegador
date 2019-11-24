@@ -19,6 +19,7 @@ public class Link implements AstHtml {
         return v.visit(this, p);
     }
 
+    @Override
     public String toString() {
         return "href: " + this.href +
             "rel: " + this.rel +

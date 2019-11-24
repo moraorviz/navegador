@@ -15,6 +15,7 @@ public class Title implements AstHtml {
         return v.visit(this, p);
     }
 
+    @Override
     public String toString() {
         return "title: " + this.text + " ";
     }

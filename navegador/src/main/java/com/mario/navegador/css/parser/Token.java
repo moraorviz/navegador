@@ -24,9 +24,8 @@ public class Token {
         return line;
     }
 
+    @Override
     public String toString() {
-
-        // TODO: poner la salida en columnas
 
         return "TOKEN: " + token + " - LEXEMA: " + lexeme + " - LINE: " + line;
     }

@@ -7,6 +7,7 @@ public class Pagina {
 
     public List<Linea> lineas = new ArrayList<Linea>();
 
+    @Override
     public String toString() {
 
         String s = "";
@@ -19,5 +20,4 @@ public class Pagina {
 
         return s;
     }
-
 }

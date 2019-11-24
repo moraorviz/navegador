@@ -16,8 +16,9 @@ public class Linea {
             this.atributos = atributos;
         }
 
-        public String toString() {
-            return "tipo: " + tipo + " texto: " + texto +
+    @Override
+    public String toString() {
+        return "tipo: " + tipo + " texto: " + texto +
             " atributos: " + atributos.toString();
-        }
+    }
 }

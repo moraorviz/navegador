@@ -19,6 +19,7 @@ public class Regla implements AstCss {
         return v.visit(this, param);
     }
 
+    @Override
     public String toString() {
         return "ident: " + ident + ", definiciones: " + definiciones.toString() + "\n";
     }

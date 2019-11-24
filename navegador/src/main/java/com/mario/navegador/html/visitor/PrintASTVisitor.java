@@ -25,7 +25,6 @@ public class PrintASTVisitor implements Visitor {
         Link link = h.link;
         String titleString = (String) title.accept(this, null);
         String linkRepr = (String) link.accept(this, null);
-
         String result= "title= " + titleString + "\n"
             + "link= " + linkRepr;
 
@@ -34,13 +33,11 @@ public class PrintASTVisitor implements Visitor {
 
     @Override
     public Object visit(H1 h1, Object param) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Object visit(H2 h2, Object param) {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -55,13 +52,11 @@ public class PrintASTVisitor implements Visitor {
 
     @Override
     public Object visit(P p, Object param) {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public Object visit(Body b, Object param) {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -71,7 +66,6 @@ public class PrintASTVisitor implements Visitor {
         String href = l.href;
         String rel = l.rel;
         String type = l.type;
-
         String result = "Link: href= " + href +
         " rel=" + rel + " type=" + type;
         
@@ -94,9 +88,6 @@ public class PrintASTVisitor implements Visitor {
 
     @Override
     public Object visit(Bloque b, Object param) {
-        // TODO Auto-generated method stub
         return null;
     }
-
-    
 }

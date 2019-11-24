@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.mario.navegador.css.ast.AstCss;
-import com.mario.navegador.css.main.Main;
 import com.mario.navegador.css.parser.Lexicon;
 import com.mario.navegador.css.parser.Parser;
 import com.mario.navegador.css.visitor.BuscaParamEnCssVisitor;
@@ -24,11 +23,10 @@ import com.mario.navegador.html.ast.P;
 import com.mario.navegador.html.ast.Parrafo;
 import com.mario.navegador.html.ast.Programa;
 import com.mario.navegador.html.ast.Title;
+import com.mario.navegador.main.Utils;
 import com.mario.navegador.render.Linea;
 import com.mario.navegador.render.Pagina;
 
-//Visitor para recorrer el arbol
-//Renderiza la pagina
 public class RenderVisitor implements Visitor {
 
     BuscaCssVisitor buscaCss = new BuscaCssVisitor();
@@ -36,13 +34,13 @@ public class RenderVisitor implements Visitor {
     AstHtml astHtml;
     AstCss defaultCssAst;
     AstCss userCssAst;
-    Main app = new Main();
+    Utils utils = new Utils();
     List<String> atributos = new ArrayList<String>();
     Pagina pagina = new Pagina();
 
     public RenderVisitor(AstHtml astHtml) {
 
-        File cssDefault = app.getFileFromResources("Default.css");
+        File cssDefault = utils.getFileFromResources("Default.css");
         FileReader fileReader = null;
 
         atributos.add("color");
@@ -59,7 +57,7 @@ public class RenderVisitor implements Visitor {
         Lexicon lex = new Lexicon(fileReader);
         Parser parser = new Parser(lex);
         String cssUserPath = (String) astHtml.accept(buscaCss, null);
-        File cssUser = app.getFileFromResources(cssUserPath);
+        File cssUser = utils.getFileFromResources(cssUserPath);
 
         defaultCssAst = parser.parse();
 
@@ -76,15 +74,12 @@ public class RenderVisitor implements Visitor {
 
     @Override
     public Object visit(Parrafo p, Object param) {
-
         return null;
     }
 
     @Override
     public Object visit(Head h, Object param) {
-
         return null;
-
     }
 
     @Override
@@ -172,7 +167,6 @@ public class RenderVisitor implements Visitor {
 
     @Override
     public Object visit(Link l, Object param) {
-        // TODO Auto-generated method stub
         return null;
     }
 
@@ -181,16 +175,16 @@ public class RenderVisitor implements Visitor {
 
         Head head = p.head;
         Body body = p.body;
+        Pagina pagina = new Pagina();
 
         head.accept(this, null);
-        Pagina pagina = (Pagina) body.accept(this, null);
+        pagina = (Pagina) body.accept(this, null);
 
         return pagina;
     }
 
     @Override
     public Object visit(Bloque b, Object param) {
-        // TODO Auto-generated method stub
         return null;
     }
 
