@@ -11,7 +11,7 @@ import com.mario.navegador.html.ast.Parrafo;
 import com.mario.navegador.html.ast.Programa;
 import com.mario.navegador.html.ast.Title;
 
-public class BuscaCss implements Visitor {
+public class BuscaCssVisitor implements Visitor {
 
     @Override
     public Object visit(Parrafo p, Object param) {

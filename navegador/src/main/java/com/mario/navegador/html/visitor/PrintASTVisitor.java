@@ -15,7 +15,6 @@ public class PrintASTVisitor implements Visitor {
 
     @Override
     public Object visit(Parrafo p, Object param) {
-        // TODO Auto-generated method stub
         return null;
     }
 

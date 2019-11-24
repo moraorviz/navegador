@@ -88,7 +88,7 @@ public class Parser {
                 return null;
             case TAMANO:
                 if (lex.getToken().getToken() == TokensId.DOSPUNTOS)
-                    return new Definicion("text-size", parseSize());
+                    return new Definicion("font-size", parseSize());
             case ABRIR: 
                 return null;
             case CERRAR:

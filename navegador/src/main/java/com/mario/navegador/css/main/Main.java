@@ -49,7 +49,7 @@ public class Main
         System.out.println("\nFin de fichero. \n" + t.toString());
     }
 
-    File getFileFromResources(String fileName) {
+    public File getFileFromResources(String fileName) {
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource(fileName);
         if (resource == null) {

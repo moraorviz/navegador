@@ -10,8 +10,10 @@ import com.mario.navegador.html.parser.Lexicon;
 import com.mario.navegador.html.parser.Parser;
 import com.mario.navegador.html.parser.Token;
 import com.mario.navegador.html.parser.TokensId;
-import com.mario.navegador.html.visitor.BuscaCss;
+import com.mario.navegador.html.visitor.BuscaCssVisitor;
 import com.mario.navegador.html.visitor.PrintASTVisitor;
+import com.mario.navegador.html.visitor.RenderVisitor;
+import com.mario.navegador.render.Pagina;
 
 public class Main {
 
@@ -45,12 +47,16 @@ public class Main {
 
         //BuscaCSS
         System.out.println("==== Probando BuscaCSS ====");
-        BuscaCss buscaCss = new BuscaCss();
+        BuscaCssVisitor buscaCss = new BuscaCssVisitor();
         String ruta = (String) astHtml.accept(buscaCss, null);
         System.out.println(ruta);
 
         //Renderiza html
         System.out.println("==== Renderizando HTML ======");
+        RenderVisitor rv = new RenderVisitor(astHtml);
+        Pagina pagina = (Pagina) astHtml.accept(rv, null);
+        System.out.println(pagina.toString());
+        System.out.println("Finalizado");
     }
 
     // Metodo auxiliar para imprimir los tokens
@@ -68,7 +74,7 @@ public class Main {
         System.out.println("\nFin de fichero. \n" + t.toString());
     }
 
-    File getFileFromResources(String fileName) {
+    public File getFileFromResources(String fileName) {
 
         ClassLoader classLoader = getClass().getClassLoader();
         URL resource = classLoader.getResource(fileName);
