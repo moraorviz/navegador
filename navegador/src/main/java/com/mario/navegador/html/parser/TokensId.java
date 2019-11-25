@@ -3,7 +3,6 @@ package com.mario.navegador.html.parser;
 public enum TokensId {
     HTML,
     HTMLCLOSE,
-    EQUAL,
     CLOSE,
     HEAD,
     HEADC,

@@ -16,6 +16,18 @@ public class Linea {
             this.atributos = atributos;
         }
 
+    public String getTexto() {
+        return this.texto;
+    }
+
+    public String getTipo() {
+        return this.tipo;
+    }
+
+    public Map<String, String> getAtributos() {
+        return this.atributos;
+    }
+
     @Override
     public String toString() {
         return "tipo: " + tipo + " texto: " + texto +

@@ -14,7 +14,6 @@ public class Lexicon {
     boolean charBuffUsed = false;
     char charBuff;
     int line = 1;
-
     HashSet<Character> charText = new HashSet<Character>();
 
     public Lexicon (FileReader f) {
@@ -23,13 +22,14 @@ public class Lexicon {
         String lex;
 
         try {
+
             char valor = (char) 0;
             char cerrarLlave;
+
             while (valor != (char) -1) {
                 valor = nextChar();
 
                 switch(valor) {
-
                     case '<':
                         valor = nextChar();
 
@@ -97,9 +97,15 @@ public class Lexicon {
 
                                     if (cerrarLlave == '>') {
                                         char primeraLetra = nextChar();
-                                        String textoInterior = getTextoInterior(primeraLetra);
-                                        lex = textoInterior;
-                                        tokens.add(new Token(TokensId.TEXT, lex, line));
+
+                                        if (Character.isAlphabetic(primeraLetra)) {
+                                            String textoInterior = getTextoInterior(primeraLetra);
+                                            lex = textoInterior;
+                                            tokens.add(new Token(TokensId.TEXT, lex, line));
+                                        } else 
+                                            returnChar(primeraLetra);
+                                            break;
+
                                     } else {
                                         errorLexico(valor + "");
                                     }
