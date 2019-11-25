@@ -13,19 +13,15 @@ public class Main
     public static void main( String[] args ) 
         throws IOException
     {
-        //Modo texto
-        GeneraPagina gp = new GeneraPagina("EX4complejo.html");
+        //Modo Texto
+        GeneraPagina gp = new GeneraPagina("EX4.html");
         Pagina pagina = gp.generarPagina();
         System.out.println(pagina.toString());
 
-        //Modo grafico
+        //Modo Grafico
         Paint paint = new Paint(pagina);
-
-        //Schedule a job for the event dispatch thread:
-        //creating and showing this application's GUI. (Tutoriales de Oracle)
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-        //Turn off metal's use of bold fonts
                 UIManager.put("swing.boldMetal", Boolean.FALSE);
                 paint.mostrarPagina();
             }
