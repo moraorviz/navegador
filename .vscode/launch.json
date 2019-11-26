@@ -2,20 +2,6 @@
     "configurations": [
         {
             "type": "java",
-            "name": "CodeLens (Launch) - HelloWorldSwing",
-            "request": "launch",
-            "mainClass": "com.mario.navegador.paint.HelloWorldSwing",
-            "projectName": "navegador"
-        },
-        {
-            "type": "java",
-            "name": "CodeLens (Launch) - Main",
-            "request": "launch",
-            "mainClass": "com.mario.navegador.paint.Main",
-            "projectName": "navegador"
-        },
-        {
-            "type": "java",
             "name": "CodeLens (Launch) - Main",
             "request": "launch",
             "mainClass": "com.mario.navegador.main.Main",
